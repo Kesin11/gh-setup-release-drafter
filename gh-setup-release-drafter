@@ -1,35 +1,13 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-echo "Hello gh-setup-release-drafter!"
+echo "Create .github/release-drafter.yml"
+curl --create-dirs -Lo .github/release-drafter.yml https://raw.githubusercontent.com/Kesin11/gh-setup-release-drafter/main/.github/release-drafter.yml
 
-# Snippets to help get started:
+echo "Create .github/workflows/release-drafter.yml"
+curl --create-dirs -Lo .github/workflows/release.yml https://raw.githubusercontent.com/Kesin11/gh-setup-release-drafter/main/.github/workflows/release.yml
 
-# Determine if an executable is in the PATH
-# if ! type -p ruby >/dev/null; then
-#   echo "Ruby not found on the system" >&2
-#   exit 1
-# fi
+echo "Crone issue labels from Kesin11/gh-setup-release-drafter"
+gh label clone Kesin11/gh-setup-release-drafter
 
-# Pass arguments through to another command
-# gh issue list "$@" -R cli/cli
-
-# Using the gh api command to retrieve and format information
-# QUERY='
-#   query($endCursor: String) {
-#     viewer {
-#       repositories(first: 100, after: $endCursor) {
-#         nodes {
-#           nameWithOwner
-#           stargazerCount
-#         }
-#       }
-#     }
-#   }
-# '
-# TEMPLATE='
-#   {{- range $repo := .data.viewer.repositories.nodes -}}
-#     {{- printf "name: %s - stargazers: %v\n" $repo.nameWithOwner $repo.stargazerCount -}}
-#   {{- end -}}
-# '
-# exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}"
+echo "Complete! Please confirm created files using 'git status' then commit and push"
