@@ -4,6 +4,13 @@ on:
     branches:
       - main
   workflow_dispatch:
+permissions:
+  contents: write
+  # Comment out to enable these permissions if needed.
+  # packages: write
+  # deployments: write
+  # id-token: write
+
 jobs:
   draft_release:
     runs-on: ubuntu-latest
