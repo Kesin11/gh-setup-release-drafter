@@ -7,7 +7,7 @@ curl --create-dirs -Lo .github/release-drafter.yml https://raw.githubusercontent
 echo "Create .github/workflows/release-drafter.yml"
 curl --create-dirs -Lo .github/workflows/release.yml https://raw.githubusercontent.com/Kesin11/gh-setup-release-drafter/main/.github/workflows/release.yml
 
-echo "Crone issue labels from Kesin11/gh-setup-release-drafter"
+echo "Clone issue labels from Kesin11/gh-setup-release-drafter"
 gh label clone Kesin11/gh-setup-release-drafter
 
 echo "Complete! Please confirm created files using 'git status' then commit and push"
