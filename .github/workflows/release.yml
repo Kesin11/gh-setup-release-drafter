@@ -4,16 +4,12 @@ on:
     branches:
       - main
   workflow_dispatch:
-permissions:
-  contents: write
-  # Comment out to enable these permissions if needed.
-  # packages: write
-  # deployments: write
-  # id-token: write
 
 jobs:
   draft_release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       tag_name: ${{ steps.release-drafter.outputs.tag_name }}
     steps:
@@ -28,6 +24,12 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # Comment out to enable these permissions if needed.
+      # packages: write
+      # deployments: write
+      # id-token: write
     if: github.event_name == 'workflow_dispatch'
     needs: draft_release
     steps:
