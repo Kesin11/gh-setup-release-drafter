@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: read
     outputs:
       tag_name: ${{ steps.release-drafter.outputs.tag_name }}
     steps:
@@ -26,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: read
       # Comment out to enable these permissions if needed.
       # packages: write
       # deployments: write
