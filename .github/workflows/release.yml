@@ -15,7 +15,7 @@ jobs:
       tag_name: ${{ steps.release-drafter.outputs.tag_name }}
     steps:
       # Get next version
-      - uses: release-drafter/release-drafter@v6
+      - uses: release-drafter/release-drafter@v7
         id: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,14 +36,14 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     needs: draft_release
     steps:
-      - uses: release-drafter/release-drafter@v6
+      - uses: release-drafter/release-drafter@v7
         id: release-drafter
         with:
           publish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create semver outputs
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         id: semver
         with:
           script: |
@@ -52,7 +52,7 @@ jobs:
             core.setOutput('major', matched[3])
             core.setOutput('minor', matched[2])
             core.setOutput('patch', matched[1])
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: "${{ steps.release-drafter.outputs.tag_name }}"
       - name: Update major and minor git tags
